@@ -1,0 +1,20 @@
+{% extends 'crud/base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	{% if cats %}
+	<h1>Наши коты</h1>
+	<ul class="list-group">
+		{% for cat in cats %}
+		<li class="list-group-item"><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<h1>Котов нет :(</h1>
+	{% endif %}
+</div>
+{% endblock %}

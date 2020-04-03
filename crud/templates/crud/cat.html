@@ -1,0 +1,24 @@
+{% extends 'crud/base.html' %}
+
+{% block title %}
+{{ cat.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="jumbotron">
+		<h2>Имя кота: {{ cat.name }}</h2>
+		<ul>
+			<li>Пол: {{ cat.get_sex_display }}</li>
+			<li>Порода: {{ cat.breed }}</li>
+			<li>Хозяин: {{ cat.owner }}</li>
+			<li>Возраст: {{ cat.age }} год(a)</li>
+			<li>Волосатость: {{ cat.get_hair_display }}</li>
+		</ul>
+		{% if request.user == cat.owner %}
+			<p><a href="{% url 'crud:update_cat' cat.id %}">Изменить параметры кота</a></p>
+			<p><a href="{% url 'crud:del_cat' cat.id %}">Удалить кота</a></p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

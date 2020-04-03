@@ -1,0 +1,14 @@
+{% extends 'crud/base.html' %}
+
+{% block title %}
+Кот удален
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="jumbotron">
+		<h2>Вы  удалили кота {{ name }} :(</h2>
+		<a href="{% url 'crud:home' %}">Главная страница</a>
+	</div>
+</div>
+{% endblock %}

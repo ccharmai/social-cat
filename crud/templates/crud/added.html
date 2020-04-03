@@ -1,0 +1,15 @@
+{% extends 'crud/base.html' %}
+
+{% block title %}
+Котенок {{ name }} успешно добавлен
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="jumbotron">
+		<h1>Вы успешно добавили котенка {{ name }}!</h1>
+		<p><a href="{% url 'crud:cat' id %}">Перейти на страницу кота {{ name }}</a></p>
+		<p><a href="{% url 'crud:home' %}">Перейти в общий список котов</a></p>
+	</div>
+</div>
+{% endblock %}
