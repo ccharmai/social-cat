@@ -1,0 +1,31 @@
+{% extends 'crud/base.html' %}
+
+{% block title %}
+Admin
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h2>Пользователи</h2>
+	{% if users %}
+		<ul>
+			{% for user in users %}
+				<li>{{ user.username }}</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<h3>Пользователей нет</h3>
+	{% endif %}
+
+	<h2>Удаленные комментарии</h2>
+	{% if comments %}
+		<ul>
+			{% for comment in comments %}
+				<li><span style="color: gray;">{{ comment.commentator }}</span> - {{ comment.body }}</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<h3>Комментариев нет</h3>
+	{% endif %}
+</div>
+{% endblock %}

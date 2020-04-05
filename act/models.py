@@ -19,3 +19,15 @@ class Comments(models.Model):
 
 	def __str__(self):
 		return f'Комментарий {self.commentator} к коту {self.cat.name} - {self.body}'
+
+class Likes(models.Model):
+	cat = models.ForeignKey(Cats, related_name='cat', on_delete=models.CASCADE)
+	user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+
+	class Meta:
+		verbose_name = 'Лайк'
+		verbose_name_plural = 'Лайки'
+
+	def __str__(self):
+		return f'{self.user.username} лайкнул {self.cat.name}а'
+

@@ -10,4 +10,5 @@ urlpatterns = [
 	path('del/<int:id>/', views.DelView, name='del_cat'),
 	path('update/<int:id>', views.UpdateView, name='update_cat'),
 	path('lk/', views.LKView, name='lk'),
+	path('adminkab/', views.AdminView, name='admin'),
 ]

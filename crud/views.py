@@ -4,7 +4,8 @@ from .forms import CatAddForm, CatUpdateForm
 from .models import Cats
 from django.shortcuts import redirect, reverse
 from act.forms import AddCommentForm
-from act.models import Comments
+from act.models import Comments, Likes
+from django.contrib.auth.models import User
 
 def HomeView(request):
 	cats = Cats.objects.all()
@@ -12,6 +13,13 @@ def HomeView(request):
 
 def CatView(request, id):
 	cat = get_object_or_404(Cats, id=id)
+	likes = Likes.objects.filter(cat=cat)
+	total_likes = likes.count()
+
+	if likes.filter(user=request.user).count():
+		liked = True
+	else:
+		liked = False
 
 	if request.user.is_staff:
 		comments = Comments.objects.filter(cat=cat)
@@ -27,7 +35,7 @@ def CatView(request, id):
 			return redirect(cat.get_absolute_url())
 	else:
 		form = AddCommentForm()
-	return render(request, 'crud/cat.html', {'cat': cat, 'comments': comments, 'form': form})
+	return render(request, 'crud/cat.html', {'cat': cat, 'comments': comments, 'form': form, 'likes': likes, 'total_likes': total_likes, 'liked': liked})
 
 @login_required
 def AddView(request):
@@ -66,3 +74,11 @@ def LKView(request):
 	cats = Cats.objects.filter(owner=request.user)
 	return render(request, 'crud/lk.html', {'user': request.user, 'cats': cats})
 
+@login_required
+def AdminView(request):
+	if not request.user.is_staff:
+		return reverse('crud:home')
+	users = User.objects.all()
+	cats = Cats.objects.all()
+	comments = Comments.objects.filter(deleted=True)
+	return render(request, 'crud/admin.html', {'users': users, 'cats': cats, 'comments': comments})
