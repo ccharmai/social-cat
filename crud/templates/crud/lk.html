@@ -6,22 +6,16 @@
 
 {% block content %}
 	<div class="container">
-		<div class="row">
-			<div class="col-5">
-				<h1>Мои коты</h1>
-				{% if cats %}
-					<ul class="list-group">
-						{% for cat in cats %}
-							<li class="list-group-item"><a href="{% url 'crud:cat' cat.id %}">{{ cat.name }}</a></li>
-						{% endfor %}
-					</ul>
-				{% else %}
-					<h4>К сожалению, вы не имеете котов на нашем ресурсе.</h4>
-					<h5>Но Вы можете <a href="{% url 'crud:add_cat' %}">добавить кота</a></h5>
-				{% endif %}
-			</div>
-			<div class="col-2"></div>
-			<div class="col-5"></div>
-		</div>
+		<h1>Мои коты</h1>
+			{% if cats %}
+				<ul class="list-group">
+			{% for cat in cats %}
+				<li class="list-group-item"><a href="{% url 'crud:cat' cat.id %}">{{ cat.name }}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<h4>К сожалению, вы не имеете котов на нашем ресурсе.</h4>
+			<h5>Но Вы можете <a href="{% url 'crud:add_cat' %}">добавить кота</a></h5>
+		{% endif %}
 	</div>
 {% endblock %}

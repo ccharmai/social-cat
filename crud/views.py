@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import CatAddForm, CatUpdateForm
 from .models import Cats
-from django.shortcuts import redirect
+from django.shortcuts import redirect, reverse
+from act.forms import AddCommentForm
+from act.models import Comments
 
 def HomeView(request):
 	cats = Cats.objects.all()
@@ -10,7 +12,22 @@ def HomeView(request):
 
 def CatView(request, id):
 	cat = get_object_or_404(Cats, id=id)
-	return render(request, 'crud/cat.html', {'cat': cat})
+
+	if request.user.is_staff:
+		comments = Comments.objects.filter(cat=cat)
+	else:
+		comments = Comments.objects.filter(cat=cat, deleted=False)
+
+	if request.method == 'POST':
+		form = AddCommentForm(request.POST)
+		if form.is_valid():
+			cd = form.cleaned_data
+			comment = Comments(cat=cat, commentator=request.user, body=cd['body'])
+			comment.save()
+			return redirect(cat.get_absolute_url())
+	else:
+		form = AddCommentForm()
+	return render(request, 'crud/cat.html', {'cat': cat, 'comments': comments, 'form': form})
 
 @login_required
 def AddView(request):

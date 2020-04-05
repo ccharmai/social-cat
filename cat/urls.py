@@ -6,5 +6,5 @@ urlpatterns = [
     path('', include('crud.urls', namespace='crud')),
     path('auth/', include('django.contrib.auth.urls')),
     path('auth/', include('log.urls', namespace='log')),
-    path('social-auth/', include('social_django.urls', namespace='social')),
+    path('act/', include('act.urls', namespace='act')),
 ]

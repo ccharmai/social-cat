@@ -6,11 +6,7 @@ SECRET_KEY = '0(+)tcugp-!sxf=ki49m7iuute+lbf##o%x=lxl%%^hff37(@_'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
-
-AUTHENTICATION_BACKENDS = [
-    'social_core.backends.facebook.FacebookOAuth2',
-]
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,10 +17,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
-    'social_django',
 
     'crud.apps.CrudConfig',
     'log.apps.LogConfig',
+    'act.apps.ActConfig'
 ]
 
 MIDDLEWARE = [
@@ -97,6 +93,3 @@ LOGOUT_REDIRECT_URL = 'crud:home'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '225670635340944'
-SOCIAL_AUTH_FACEBOOK_SECRET = '6f162d826e1045b083fa28bc5509c15c'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
