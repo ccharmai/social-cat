@@ -20,7 +20,8 @@ INSTALLED_APPS = [
 
     'crud.apps.CrudConfig',
     'log.apps.LogConfig',
-    'act.apps.ActConfig'
+    'act.apps.ActConfig',
+    # 'ajax.apps.AjaxConfig',
 ]
 
 MIDDLEWARE = [

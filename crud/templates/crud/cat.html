@@ -15,7 +15,7 @@
 			<li>Хозяин: {{ cat.owner }}</li>
 			<li>Возраст: {{ cat.age }} год(a)</li>
 			<li>Волосатость: {{ cat.get_hair_display }}</li>
-			<li style="list-style: none;">{{ total_likes }} <a href="{% url 'act:like' cat.id %}" style="text-decoration: none;">{% if liked %}💜{% else %}🤍{% endif %}</a></li>
+			<li style="list-style: none;"><span class="likes">{{ total_likes }}</span> <a style="text-decoration: none;" href="" data-cat-id="{{ cat.id }}" data-user-id="{{ request.user.id }}" class="like"><span class="heart">{% if liked %}💜{% else %}🤍{% endif %}</span></a></li>
 		</ul>
 
 		{% if request.user == cat.owner %}
@@ -48,4 +48,31 @@
 		{% endif %}
 	</div>
 </div>
+{% endblock %}
+
+{% block script %}
+$(document).ready(function() {
+	let button = document.querySelector('.like');
+	button.onclick = function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: "{% url 'act:like_ajax' %}",
+			type: "post",
+			data: {cat_id: button.dataset.catId, user_id: button.dataset.userId},
+			headers: {'X-CSRFToken': '{{ csrf_token }}'},
+			success: function(data) {
+				let likedCount = document.querySelector('.likes');
+				let heart = document.querySelector('.heart')
+				if (data['status'] == 'liked'){
+					likedCount.textContent++;
+					heart.textContent = '💜';
+				}
+				else {
+					likedCount.textContent--;
+					heart.textContent = '🤍';
+				}
+			}
+		});
+	};
+});
 {% endblock %}
