@@ -16,10 +16,12 @@ def CatView(request, id):
 	likes = Likes.objects.filter(cat=cat)
 	total_likes = likes.count()
 
-	if likes.filter(user=request.user).count():
-		liked = True
-	else:
-		liked = False
+	liked = False
+	if request.user.is_authenticated:
+		if likes.filter(user=request.user).count():
+			liked = True
+		else:
+			liked = False
 
 	if request.user.is_staff:
 		comments = Comments.objects.filter(cat=cat)

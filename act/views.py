@@ -11,6 +11,7 @@ def CommentDeleteView(request, id):
 	comment.save()
 	return redirect(cat.get_absolute_url())
 
+@login_required
 def LikeView(request, cat_id):
 	user = request.user
 	cat = get_object_or_404(Cats, id=cat_id)
@@ -21,3 +22,6 @@ def LikeView(request, cat_id):
 		like = Likes(user=user, cat=cat)
 		like.save()
 	return redirect(cat.get_absolute_url())
+
+def LogRedirect(request):
+	return redirect('login')
