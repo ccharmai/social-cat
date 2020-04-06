@@ -10,5 +10,7 @@ urlpatterns = [
     path('auth/', include('log.urls', namespace='log')),
     path('act/', include('act.urls', namespace='act')),
 
+    path('api/', include('api.urls', namespace='api')),
+
     path('accounts/login/', LogRedirect),
 ]

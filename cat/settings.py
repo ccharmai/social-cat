@@ -17,12 +17,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
+    'rest_framework',
 
     'crud.apps.CrudConfig',
     'log.apps.LogConfig',
     'act.apps.ActConfig',
-    # 'ajax.apps.AjaxConfig',
+    'api.apps.ApiConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

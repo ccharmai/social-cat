@@ -51,8 +51,26 @@
 {% endblock %}
 
 {% block script %}
-$(document).ready(function() {
+
+function getCount() {
 	let button = document.querySelector('.like');
+	let likedCount = document.querySelector('.likes');
+	$.ajax({
+		url: "{% url 'act:like_count' %}",
+		type: "get",
+		data: {cat_id: button.dataset.catId},
+		headers: {'X-CSRFToken': '{{ csrf_token }}'},
+		success: function(data) {
+			likedCount.textContent = data['count'];
+		}
+	});
+}
+
+$(document).ready(function() {
+	getCount();
+	setInterval('getCount()', 2000);
+	let button = document.querySelector('.like');
+
 	button.onclick = function(e) {
 		e.preventDefault();
 		$.ajax({
@@ -67,7 +85,7 @@ $(document).ready(function() {
 					likedCount.textContent++;
 					heart.textContent = '💜';
 				}
-				else {
+				if (data['status'] == 'unliked') {
 					likedCount.textContent--;
 					heart.textContent = '🤍';
 				}

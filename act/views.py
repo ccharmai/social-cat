@@ -46,7 +46,14 @@ def LikeAjaxView(request):
 		like.save()
 		return JsonResponse({'status': 'liked'})
 
-
+def GetLikeCount(request):
+	cat_id = request.GET['cat_id']
+	cat = get_object_or_404(Cats, id=cat_id)
+	cats_likes = Likes.objects.filter(cat=cat)
+	count = cats_likes.count()
+	answer = {}
+	answer['count'] = count
+	return JsonResponse(answer)
 
 def LogRedirect(request):
 	return redirect('login')
