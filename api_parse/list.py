@@ -1,6 +1,7 @@
 import requests
 
 base_url = '127.0.0.1:8000'
+base_url = '37.230.113.135'
 
 class Cat:
 	def __init__(self, id, owner, name, sex, age, breed, hair):
@@ -42,6 +43,6 @@ while True:
 	i += 1
 
 print(f'Найдено {i} котов\n')
-for z in range(2):
+for z in range(i):
 	cats[z].print()
 
