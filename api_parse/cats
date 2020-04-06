@@ -1,0 +1,47 @@
+Найдено 5 котов
+
+id = 4
+owner_id = 5
+owner_name = Sergey
+name = Мурзик
+sex = m
+age = 2
+breed = Гладкошерстный
+hair = 2
+
+id = 5
+owner_id = 1
+owner_name = admin
+name = Кисель
+sex = m
+age = 1
+breed = Пушистик
+hair = 2
+
+id = 6
+owner_id = 6
+owner_name = Vladosik@tak
+name = Астра
+sex = z
+age = 2
+breed = Дворовая вислоухая
+hair = 2
+
+id = 8
+owner_id = 9
+owner_name = Юзер
+name = Хурма
+sex = z
+age = 1
+breed = Вислоухая
+hair = 4
+
+id = 9
+owner_id = 10
+owner_name = Ta__chouette
+name = Клеопатра
+sex = z
+age = 6
+breed = Донской сфинкс
+hair = 0
+
