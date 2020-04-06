@@ -42,6 +42,6 @@ while True:
 	i += 1
 
 print(f'Найдено {i} котов\n')
-for z in range(2):
+for z in range(i):
 	cats[z].print()
 
